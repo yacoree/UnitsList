@@ -1,0 +1,46 @@
+﻿@page "/"
+
+<PageTitle>Units List</PageTitle>
+
+@using UnitsList.Data
+@using UnitsList.Data.Units
+@inject UnitsLoadService unitsLoadService
+
+<h1>Units</h1>
+
+
+@if (unitsLoadService.UnitsList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Level</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in unitsLoadService.UnitsList)
+            {
+                <tr>
+                    <td>@forecast.Name</td>
+                    <td>@forecast.GetType().Name</td>
+                    <td>@forecast.Level</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Unit>? UnitsList;
+
+    protected override async Task OnInitializedAsync()
+    {
+        UnitsList = unitsLoadService.GetUnitsList();
+    }
+}
