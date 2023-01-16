@@ -7,10 +7,9 @@ namespace UnitsList.Data
     {
         public List<Unit> UnitsList { get; set; }
 
-        public List<Unit> GetUnitsList()
+        public Task<List<Unit>> GetUnitsListAsync()
         {
-            UnitsList = MongoExample.FindAllUnits();
-            return UnitsList;
+            return Task.FromResult(MongoExample.FindAllUnits());
         }
     }
 }

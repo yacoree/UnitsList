@@ -9,7 +9,7 @@
 <h1>Units</h1>
 
 
-@if (unitsLoadService.UnitsList == null)
+@if (UnitsList == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -24,7 +24,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in unitsLoadService.UnitsList)
+            @foreach (var forecast in UnitsList)
             {
                 <tr>
                     <td>@forecast.Name</td>
@@ -41,6 +41,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        UnitsList = unitsLoadService.GetUnitsList();
+        await Task.Delay(3000);
+        UnitsList = await unitsLoadService.GetUnitsListAsync();
     }
 }
